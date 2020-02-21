@@ -15,26 +15,6 @@ router.get("/", (req, res) => {
 });
 
 
-
-
-router.get("/:id/projects", (req, res) => {
-  const { id } = req.params;
-
-  Schemes.findSteps(id)
-    .then(steps => {
-      if (steps.length) {
-        res.json(steps);
-      } else {
-        res
-          .status(404)
-          .json({ message: "Could not find steps for given scheme" });
-      }
-    })
-    .catch(err => {
-      res.status(500).json({ message: "Failed to get steps" });
-    });
-});
-
 router.post("/", (req, res) => {
   const projectData = req.body;
 
@@ -46,6 +26,79 @@ router.post("/", (req, res) => {
       res.status(500).json({ message: "Failed to create new project" });
     });
 });
+
+
+router.get("/", (req, res) => {
+  Projects.find()
+    .then(resource => {
+      res.json(resource);
+    })
+    .catch(err => {
+      res.status(500).json({ message: "Failed to get project" });
+    });
+});
+
+router.post("/", (req, res) => {
+  const resourceData = req.body;
+
+  Projects.add(resourceData)
+    .then(resource => {
+      res.status(201).json(resource);
+    })
+    .catch(err => {
+      res.status(500).json({ message: "Failed to create new resource" });
+    });
+});
+
+router.get("/:id/resources", (req, res) => {
+  const { id } = req.params;
+
+  Projects.findResource(id)
+    .then(resources => {
+      if (resources.length) {
+        res.json(resources);
+      } else {
+        res
+          .status(404)
+          .json({ message: "Could not find resources for given project" });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ message: "Failed to get resources" });
+    });
+});
+
+router.post("/", (req, res) => {
+  const taskData = req.body;
+
+  Projects.add(taskData)
+    .then(task => {
+      res.status(201).json(task);
+    })
+    .catch(err => {
+      res.status(500).json({ message: "Failed to create new task" });
+    });
+});
+
+router.get("/:id/tasks", (req, res) => {
+  const { id } = req.params;
+
+  Projects.findTask(id)
+    .then(tasks => {
+      if (tasks.length) {
+        res.json(tasks);
+      } else {
+        res
+          .status(404)
+          .json({ message: "Could not find task for given project" });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ message: "Failed to get resources" });
+    });
+});
+
+
 
 
 

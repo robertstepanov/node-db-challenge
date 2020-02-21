@@ -40,11 +40,19 @@ Demonstrate your understanding of this week's concepts by answering the followin
 
 - [ ] Explain the difference between `Relational Databases` and `SQL`.
 
+  There is none, both relational DB's. NoSQL is non-relational
+
 - [ ] Why do tables need a `primary key`?
+
+  Because they are UNIQUE.
 
 - [ ] What is the name given to a table column that references the primary key on another table.
 
+  Foreign Key
+
 - [ ] What do we need in order to have a _many to many_ relationship between two tables.
+
+  Three or more tables
 
 ## Minimum Viable Product
 
